@@ -18,7 +18,6 @@ package cd.go.contrib.elasticagent;
 
 import cd.go.contrib.elasticagent.requests.CreateAgentRequest;
 import cd.go.contrib.elasticagent.utils.Size;
-import cd.go.contrib.elasticagent.utils.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.github.mustachejava.DefaultMustacheFactory;
@@ -34,10 +33,8 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static cd.go.contrib.elasticagent.Constants.KUBERNETES_POD_CREATION_TIME_FORMAT;
 import static cd.go.contrib.elasticagent.KubernetesPlugin.LOG;
 import static cd.go.contrib.elasticagent.executors.GetProfileMetadataExecutor.POD_CONFIGURATION;
 import static cd.go.contrib.elasticagent.utils.Util.getSimpleDateFormat;
@@ -62,7 +59,7 @@ public class KubernetesInstance {
         Container container = new Container();
         container.setName(containerName);
         container.setImage(image(request.properties()));
-        container.setImagePullPolicy("IfNotPresent");
+        container.setImagePullPolicy("Always");
 
         ResourceRequirements resources = new ResourceRequirements();
         resources.setLimits(new HashMap<String, Quantity>() {{
@@ -70,7 +67,7 @@ public class KubernetesInstance {
             if (StringUtils.isNotBlank(maxMemory)) {
                 LOG.debug(String.format("[Create Agent] Setting memory resource limit on k8s pod:%s", maxMemory));
                 Size mem = Size.parse(maxMemory);
-                put("memory", new Quantity(String.valueOf(mem.toMegabytes()), "Mi"));
+                put("memory", new Quantity(String.valueOf(mem.toMegabytes())+"Mi"));
             }
 
             String maxCPU = request.properties().get("MaxCPU");
