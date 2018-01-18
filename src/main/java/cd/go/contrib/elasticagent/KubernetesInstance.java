@@ -151,7 +151,7 @@ public class KubernetesInstance {
     private static Collection<? extends EnvVar> parseEnvironments(String environment) {
         ArrayList<EnvVar> envVars = new ArrayList<>();
         for (String env : environment.split("\n")) {
-            String[] parts = env.split("=");
+            String[] parts = env.split("=", 2);
             envVars.add(new EnvVar(parts[0], parts[1], null));
         }
 
