@@ -36,12 +36,23 @@ public class PluginSettings {
     private String kubernetesClusterUrl;
 
     @Expose
+    @SerializedName("kubernetes_cluster_client_cert")
+    private String kubernetesClusterClientCert;
+
+    @Expose
+    @SerializedName("" +
+            "kubernetes_cluster_client_key")
+    private String kubernetesClusterClientKey;
+
+    @Expose
     @SerializedName("kubernetes_cluster_username")
     private String kubernetesClusterUsername;
 
     @Expose
-    @SerializedName("kubernetes_cluster_password")
+    @SerializedName("" +
+            "kubernetes_cluster_password")
     private String kubernetesClusterPassword;
+
 
     @Expose
     @SerializedName("kubernetes_cluster_ca_cert")
@@ -98,6 +109,14 @@ public class PluginSettings {
 
     public String getKubernetesClusterUrl() {
         return kubernetesClusterUrl;
+    }
+
+    public String getKubernetesClusterClientCert() {
+        return kubernetesClusterClientCert;
+    }
+
+    public String getKubernetesClusterClientKey() {
+        return kubernetesClusterClientKey;
     }
 
     public String getKubernetesClusterUsername() {

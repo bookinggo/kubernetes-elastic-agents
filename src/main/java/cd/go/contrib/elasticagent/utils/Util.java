@@ -21,6 +21,7 @@ import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,5 +89,14 @@ public class Util {
         final String[] units = new String[]{"B", "KB", "MB", "GB", "TB", "PB", "EB"};
         int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
         return new DecimalFormat("#,##0.##").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
+    public static String envOrSystemValueOrDefault(String key, String defaultValue){
+        String environmentValue = System.getenv(key);
+        if(StringUtils.isNotBlank(environmentValue)){
+            return environmentValue;
+        }
+
+        return System.getProperty(key,defaultValue);
     }
 }

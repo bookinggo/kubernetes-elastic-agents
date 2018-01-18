@@ -79,6 +79,19 @@
     </div>
 
     <div class="form_item_block">
+        <label>Kubernetes Client Cert:</label>
+        <textarea type="text" ng-model="kubernetes_cluster_client_cert" rows="7" ng-required="false"></textarea>
+        <span class="form_error" ng-show="GOINPUTNAME[kubernetes_cluster_client_cert].$error.server">{{GOINPUTNAME[kubernetes_cluster_client_cert].$error.server}}</span>
+    </div>
+
+    <div class="form_item_block">
+        <label>Kubernetes Client Key:</label>
+        <textarea type="text" ng-model="kubernetes_cluster_client_key" rows="7" ng-required="false"></textarea>
+        <span class="form_error" ng-show="GOINPUTNAME[kubernetes_cluster_client_key].$error.server">{{GOINPUTNAME[kubernetes_cluster_client_key].$error.server}}</span>
+    </div>
+
+
+    <div class="form_item_block">
         <label>Kubernetes Cluster Username:</label>
         <input type="text" ng-model="kubernetes_cluster_username" ng-required="false"/>
         <span class="form_error" ng-show="GOINPUTNAME[kubernetes_cluster_username].$error.server">{{GOINPUTNAME[kubernetes_cluster_username].$error.server}}</span>

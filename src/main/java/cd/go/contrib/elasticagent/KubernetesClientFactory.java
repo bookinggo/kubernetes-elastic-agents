@@ -33,6 +33,16 @@ public class KubernetesClientFactory {
 
     private static KubernetesClient createClient(PluginSettings pluginSettings) throws Exception {
         ConfigBuilder configBuilder = new ConfigBuilder().withMasterUrl(pluginSettings.getKubernetesClusterUrl());
+
+
+        if(StringUtils.isNotBlank(pluginSettings.getKubernetesClusterClientKey())){
+            configBuilder.withClientKeyData(pluginSettings.getKubernetesClusterClientKey());
+        }
+
+        if(StringUtils.isNotBlank(pluginSettings.getKubernetesClusterClientCert())){
+            configBuilder.withClientCertData(pluginSettings.getKubernetesClusterClientCert());
+        }
+
         if (StringUtils.isNotBlank(pluginSettings.getKubernetesClusterUsername())) {
             configBuilder.withUsername(pluginSettings.getKubernetesClusterUsername());
         }

@@ -18,6 +18,7 @@ package cd.go.contrib.elasticagent;
 
 import cd.go.contrib.elasticagent.utils.Util;
 import com.thoughtworks.go.plugin.api.GoPluginIdentifier;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
 
@@ -45,7 +46,7 @@ public interface Constants {
     // internal use only
     String CREATED_BY_LABEL_KEY = "Elastic-Agent-Created-By";
     String ENVIRONMENT_LABEL_KEY = "Elastic-Agent-Environment-Name";
-    String KUBERNETES_NAMESPACE_KEY = "default";
+    String KUBERNETES_NAMESPACE_KEY = Util.envOrSystemValueOrDefault("KUBERNETES_NAMESPACE_KEY","gocd");
     String KUBERNETES_POD_KIND_LABEL_KEY = "kind";
     String KUBERNETES_POD_KIND_LABEL_VALUE = "kubernetes-elastic-agent";
     String KUBERNETES_POD_NAME = "kubernetes-elastic-agent";
@@ -55,4 +56,7 @@ public interface Constants {
     String CONTAINER_POSTFIX = "CONTAINER_POSTFIX";
     String GOCD_AGENT_IMAGE = "GOCD_AGENT_IMAGE";
     String LATEST_VERSION = "LATEST_VERSION";
+
+
+
 }
